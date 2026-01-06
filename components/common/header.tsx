@@ -46,7 +46,7 @@ export default function Header() {
         </NavLink>
 
         {/* Center Nav */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-40">
           <NavLink
             href="/pricing"
             className={cn(
@@ -69,17 +69,17 @@ export default function Header() {
 
         {/* Right */}
         <SignedIn>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2">
             <NavLink
               href="/upload"
               className={cn(
-                "text-xl font-medium text-slate-900 transition-colors",
+                "text-xl font-medium text-slate-900 transition-colors mr-7",
                 hoverUnderline
               )}
             >
               Upload a PDF
             </NavLink>
-            <div>Pro</div>
+            <div className="text-xl font-medium text-slate-900 cursor-pointer">Pro</div>
             <SignedIn>
               <UserButton />
             </SignedIn> 
@@ -88,7 +88,7 @@ export default function Header() {
           <SignedOut>
           <div className="flex items-center gap-6">
           <NavLink
-            href="/login"
+            href="/sign-in"
             className={cn(
               "text-xl font-medium text-slate-900 transition-colors",
               hoverUnderline )}>

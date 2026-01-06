@@ -61,7 +61,7 @@ export default function HeroSection() {
         <div className="mb-8 flex justify-center">
           <Badge
             variant="outline"
-            className="relative cursor-pointer px-4 py-1.5 text-sm font-medium text-indigo-600 border-indigo-200 bg-indigo-50 hover:bg-indigo-100 transition-colors gap-2 rounded-full"
+            className="relative cursor-default px-4 py-1.5 text-sm font-medium text-indigo-600 border-indigo-200 bg-indigo-50 hover:bg-indigo-100 transition-colors gap-2 rounded-full"
           >
             <Sparkles className="h-4 w-4 fill-indigo-600 text-indigo-600 animate-pulse" />
             <span>Powered by AI</span>
