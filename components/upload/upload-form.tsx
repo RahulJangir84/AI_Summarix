@@ -2,8 +2,7 @@
 import { useUploadThing } from "@/utils/uploadthing";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
-
-
+import { toast } from "sonner";
 //to validate the file
 const schema = z.object({
   file: z
@@ -25,6 +24,9 @@ export default function UploadForm() {
     },
     onUploadError: (err) => {
       console.error("error occured while uploading", err);
+      toast.error("Error occured while uploading", {
+        description: err.message,
+      });
     },
     onUploadBegin: (fileName) => {
       console.log("Upload has begun for", fileName);
@@ -39,19 +41,38 @@ export default function UploadForm() {
     //validation
     const validatedFields = schema.safeParse({ file });
     if (!validatedFields.success) {
-      console.log(validatedFields.error);
+      toast.error("Invalid file", {
+        description: validatedFields.error.message,
+      });
       return;
     }
 
+    toast.success("Uploading PDF...", {
+      description: "Please wait while we upload your PDF",
+    });
+
     //upload file to uploadthing
+    //Behind the scenes:
+    // Client asks server for presigned URL
+    // UploadThing returns secure URL
+    // File uploads directly to CDN
+    // Final file URL is returned
     const resp = await startUpload([file]);
     if (!resp) {
+      toast.error("Something went wrong", {
+        description: "Please try again with a different file",
+      });
       return;
     }
+
+    
+    toast.loading("Processing PDF...", {
+      description: "Please wait while we process your PDF",
+    });
 
 
     //parse the pdf using langchain
-
+    
     
   };
   return (
