@@ -14,7 +14,7 @@ export default function UploadHeader() {
       <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mt-3">
         Start Uploading{" "}
         <span className="relative text-indigo-600">
-          Your PDFs
+          Your PDF&apos;s
           <span className="absolute left-0 -bottom-1 w-full h-1 bg-indigo-200 rounded-full"></span>
         </span>
       </h1>
