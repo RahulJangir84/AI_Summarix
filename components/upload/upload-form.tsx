@@ -3,6 +3,8 @@ import { useUploadThing } from "@/utils/uploadthing";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { toast } from "sonner";
+import { generatePdfSummary } from "@/actions/upload-action";
+import { useRef,useState } from "react";
 //to validate the file
 const schema = z.object({
   file: z
@@ -17,7 +19,15 @@ const schema = z.object({
     ),
 });
 
+//
+
 export default function UploadForm() {
+
+  const formRef=useRef<HTMLFormElement>(null);
+  const [isLoading,setIsLoading]=useState(false);
+
+
+
   const { startUpload, routeConfig } = useUploadThing("pdfUploader", {
     onClientUploadComplete: () => {
       console.log("Uploaded successfully");
@@ -33,9 +43,15 @@ export default function UploadForm() {
     },
   });
 
+
+  // handlesubmit is called when form is submitted
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); //stops browser reload
-    console.log("submitted");
+
+    try{
+
+      setIsLoading(true);
+       console.log("submitted");
     const formData = new FormData(e.currentTarget);
     const file = formData.get("file") as File;
     //validation
@@ -44,6 +60,7 @@ export default function UploadForm() {
       toast.error("Invalid file", {
         description: validatedFields.error.message,
       });
+      setIsLoading(false);
       return;
     }
 
@@ -62,6 +79,7 @@ export default function UploadForm() {
       toast.error("Something went wrong", {
         description: "Please try again with a different file",
       });
+      setIsLoading(false);
       return;
     }
 
@@ -72,13 +90,33 @@ export default function UploadForm() {
 
 
     //parse the pdf using langchain
-    
-    
+    const summary =await generatePdfSummary(resp);
+    console.log({summary});
+
+
+    const {data=null,message=null}=summary || {};
+    if(data){
+      toast.success("Saving PDF..",{
+        description:"Please wait while we save your summary",
+      });
+      formRef.current?.reset();
+      // if(data.summary){
+
+      //   // upload to database
+      // }
+
+    }
+}
+    catch(error){
+      setIsLoading(false);
+      console.log("Error Occured",error);
+      formRef.current?.reset();
+    }
   };
   return (
     //handlesubmit runs when form is submitted in uploadforminput
     <div className="flex flex-col gap-8 w-full max-w-2xl mx-auto ">
-      <UploadFormInput onSubmit={handleSubmit} />
+      <UploadFormInput isLoading={isLoading} ref={formRef} onSubmit={handleSubmit} />
     </div>
   );
 }

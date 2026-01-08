@@ -52,7 +52,6 @@ const people = [
 
 export default function HeroSection() {
   return (
-    
     <section className="relative w-full overflow-hidden bg-white/50 dark:bg-slate-950">
       <div className="relative flex min-h-screen w-full flex-col items-start justify-start overflow-hidden">
       <BackgroundRippleEffect />
@@ -89,7 +88,7 @@ export default function HeroSection() {
             size="lg"
             className="hover:cursor-pointer h-12 lg:px-8 md:px-6 sm:px-4 text-white text-base bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-600/20 "
           >
-            <Link href="/login"/>
+            <Link/>
             Try Summarix
           </Button>
         </div>

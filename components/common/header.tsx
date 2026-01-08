@@ -48,7 +48,7 @@ export default function Header() {
         {/* Center Nav */}
         <div className="hidden md:flex items-center gap-40">
           <NavLink
-            href="/pricing"
+            href="#pricing"
             className={cn(
               "text-xl font-medium text-slate-900",
               hoverUnderline
