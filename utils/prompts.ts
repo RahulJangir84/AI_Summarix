@@ -14,6 +14,7 @@ Follow these rules strictly:
 5. Use clear headings and bullet points where appropriate.
 6. Maintain the original intent and tone of the document.
 7. Avoid unnecessary repetition and filler language.
+8. Try to keep the summary under 400 words.
 
 Output format:
 - Title of the document (if available)

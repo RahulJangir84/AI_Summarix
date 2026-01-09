@@ -3,8 +3,9 @@ import { useUploadThing } from "@/utils/uploadthing";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { toast } from "sonner";
-import { generatePdfSummary } from "@/actions/upload-action";
+import { generatePdfSummary, saveSummaryToDatabase } from "@/actions/upload-action";
 import { useRef,useState } from "react";
+import router from "next/router";
 //to validate the file
 const schema = z.object({
   file: z
@@ -49,74 +50,99 @@ export default function UploadForm() {
     e.preventDefault(); //stops browser reload
 
     try{
-
       setIsLoading(true);
-       console.log("submitted");
-    const formData = new FormData(e.currentTarget);
-    const file = formData.get("file") as File;
-    //validation
-    const validatedFields = schema.safeParse({ file });
-    if (!validatedFields.success) {
-      toast.error("Invalid file", {
-        description: validatedFields.error.message,
+      console.log("submitted");
+      const formData = new FormData(e.currentTarget);
+      const file = formData.get("file") as File;
+      //validation
+      const validatedFields = schema.safeParse({ file });
+      if (!validatedFields.success) {
+        toast.error("Invalid file", {
+          description: validatedFields.error.message,
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      toast.success("Uploading PDF...", {
+        description: "Please wait while we upload your PDF",
       });
-      setIsLoading(false);
-      return;
-    }
 
-    toast.success("Uploading PDF...", {
-      description: "Please wait while we upload your PDF",
-    });
+      //upload file to uploadthing
+      //Behind the scenes:
+      // Client asks server for presigned URL
+      // UploadThing returns secure URL
+      // File uploads directly to CDN
+      // Final file URL is returned
+      const resp = await startUpload([file]);
+      if (!resp) {
+        toast.error("Something went wrong", {
+          description: "Please try again with a different file",
+        });
+        setIsLoading(false);
+        return;
+      }
 
-    //upload file to uploadthing
-    //Behind the scenes:
-    // Client asks server for presigned URL
-    // UploadThing returns secure URL
-    // File uploads directly to CDN
-    // Final file URL is returned
-    const resp = await startUpload([file]);
-    if (!resp) {
-      toast.error("Something went wrong", {
-        description: "Please try again with a different file",
+
+      toast.success("Processing PDF...", {
+        description: "Please wait while we process your PDF",
       });
-      setIsLoading(false);
-      return;
-    }
-
-    
-    toast.loading("Processing PDF...", {
-      description: "Please wait while we process your PDF",
-    });
 
 
-    //parse the pdf using langchain
+      //parse the pdf using langchain
     const summary =await generatePdfSummary(resp);
     console.log({summary});
 
 
-    const {data=null,message=null}=summary || {};
-    if(data){
-      toast.success("Saving PDF..",{
-        description:"Please wait while we save your summary",
-      });
-      formRef.current?.reset();
-      // if(data.summary){
+      const { data = null } = summary || {};
+      if (data) {
+        let storeResponse: any;
+        toast.success("Saving PDF..", {
+          description: "Please wait while we save your summary",
+        });
 
-      //   // upload to database
-      // }
+        // upload to database if summary is not null
+      if(data.summary){
+        storeResponse=await saveSummaryToDatabase({
+          summary:data.summary,
+          pdfUrl:resp[0].serverData.file.url,
+          title:data.title,
+          pdfName:file.name,
+          });
 
-    }
-}
-    catch(error){
+          if (storeResponse.success) {
+            toast.success("Summary Generated", {
+              description:
+                "Your PDF has been saved successfully summarized and saved",
+            });
+
+            formRef.current?.reset();
+            //redirect to summary page as soon as summary is saved
+            router.push(`/summary/${storeResponse.data.id}`);
+
+          } else {
+            toast.error("Error saving summary", {
+              description: storeResponse.message,
+            });
+          }
+        }
+      }
+    } catch (error) {
       setIsLoading(false);
       console.log("Error Occured",error);
       formRef.current?.reset();
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
     //handlesubmit runs when form is submitted in uploadforminput
     <div className="flex flex-col gap-8 w-full max-w-2xl mx-auto ">
-      <UploadFormInput isLoading={isLoading} ref={formRef} onSubmit={handleSubmit} />
+      <UploadFormInput
+      isLoading={isLoading}
+      ref={formRef}
+      onSubmit={handleSubmit}
+      />
     </div>
   );
 }
