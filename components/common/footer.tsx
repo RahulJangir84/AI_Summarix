@@ -61,7 +61,7 @@ export default function Footer() {
     },
   ];
   return (
-    <div className="flex items-center justify-center h-[35rem] w-full">
+    <div className="flex items-center justify-center h-[25rem] w-full bg-gradient-to-br from-indigo-700 to-indigo-950">
       <FloatingDock
         mobileClassName="translate-y-20" // only for demo, remove for production
         items={links}

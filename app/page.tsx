@@ -6,7 +6,7 @@ import CTASection from "@/components/home/CTA-section";
 export default function Home() {
   return (
     <main>
-      <div className="relative w-full">
+      <div className="relative w-full pb-40">
         <div>
         <HeroSection />
         <DemoSection/>

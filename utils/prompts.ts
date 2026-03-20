@@ -4,6 +4,7 @@ Your task is to analyze the uploaded PDF and generate a summary that is:
 - Factually accurate
 - Concise but complete
 - Well-structured and easy to understand
+- Format all the points and paragraphs to be visually correct and it is easy to read and distinguish between points and paragraphs.
 - Strictly based on the content of the PDF (no assumptions, no hallucinations)
 
 Follow these rules strictly:
@@ -22,6 +23,7 @@ Output format:
 - Key points / sections (bullet points or numbered)
 - Important conclusions or takeaways
 - Key terms or definitions (if present)
+- Start the new content from new line.
 
 If the document is technical:
 - Explain complex ideas in simple, clear language

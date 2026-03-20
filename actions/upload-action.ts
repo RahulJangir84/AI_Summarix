@@ -5,15 +5,16 @@ import { generateSummaryFromOpenAI } from "@/lib/openAI";
 import { generateSummaryFromGeminiAPI } from "@/lib/geminiAI";
 import { auth } from "@clerk/nextjs/server";
 import { getDbConnection } from "@/lib/database";
-import {formatPdfNameAsTitle} from "@/utils/format";
+import { formatPdfNameAsTitle } from "@/utils/format";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
-interface PdfSummaryProps{
-    userId?:string;
-    pdfUrl:string;
-    summary:string;
-    title:string;
-    pdfName:string;
+interface PdfSummaryProps {
+  userId?: string;
+  pdfUrl: string;
+  summary: string;
+  title: string;
+  pdfName: string;
 }
 
 export async function generatePdfSummary(
@@ -26,15 +27,15 @@ export async function generatePdfSummary(
           name: string;
         };
       };
-}]
-)
- {
-    if(!uploadResponse){
-        return{
-            success:false,
-            message:"File upload failed",
-            data:null,
-        }
+    },
+  ],
+) {
+  if (!uploadResponse) {
+    return {
+      success: false,
+      message: "File upload failed",
+      data: null,
+    };
   }
 
   const {
@@ -43,51 +44,51 @@ export async function generatePdfSummary(
     },
   } = uploadResponse[0];
 
-    if(!pdfUrl){
-        return{
-            success:false,
-            message:"File upload failed",
-            data:null,
-        }
+  if (!pdfUrl) {
+    return {
+      success: false,
+      message: "File upload failed",
+      data: null,
+    };
   }
 
-    try{
-        const pdfText=await fetchAndExtractPdfText(pdfUrl);
-        console.log({pdfText});
+  try {
+    const pdfText = await fetchAndExtractPdfText(pdfUrl);
+    console.log({ pdfText });
 
     let summary;
-        try{
-            summary=await generateSummaryFromGeminiAPI(pdfText);
-            console.log({summary});
-        }
-        catch(error){
+    try {
+      summary = await generateSummaryFromGeminiAPI(pdfText);
+      console.log({ summary });
+    } catch (error) {
       console.log(error);
-            if(error instanceof Error && error.message==="Rate limit exceeded" ){
-                try{
-                    summary=await generateSummaryFromOpenAI(pdfText);
+      if (error instanceof Error && error.message === "Rate limit exceeded") {
+        try {
+          summary = await generateSummaryFromOpenAI(pdfText);
           console.log(summary);
-                }
-                catch(geminiError){
-                    console.error("OpenAI API failed after Gemini rate limit exceeded",geminiError);
+        } catch (geminiError) {
+          console.error(
+            "OpenAI API failed after Gemini rate limit exceeded",
+            geminiError,
+          );
           throw new Error("Summary generation failed");
         }
       }
-            
     }
 
-        if(!summary){
+    if (!summary) {
       return {
-                success:false,
-                message:"Summary generation failed",
-                data:null,
-            }
+        success: false,
+        message: "Summary generation failed",
+        data: null,
+      };
     }
-        const formattedPdfName =formatPdfNameAsTitle(pdfName);
+    const formattedPdfName = formatPdfNameAsTitle(pdfName);
     return {
-            success:true,
-            message:"Summary generated successfully",
-            data:{
-                title:formattedPdfName,
+      success: true,
+      message: "Summary generated successfully",
+      data: {
+        title: formattedPdfName,
         summary,
       },
     };
@@ -101,11 +102,17 @@ export async function generatePdfSummary(
   }
 }
 
-async function savePdfSummary({userId,pdfUrl,summary,title,pdfName}:PdfSummaryProps){
+async function savePdfSummary({
+  userId,
+  pdfUrl,
+  summary,
+  title,
+  pdfName,
+}: PdfSummaryProps) {
   //sql inserting pdf summary
   try {
     const sql = await getDbConnection();
-    const result = await sql`
+    const [savedSummary] = await sql`
         INSERT INTO pdf_summary(
         user_id,
         original_file_url,
@@ -120,50 +127,65 @@ async function savePdfSummary({userId,pdfUrl,summary,title,pdfName}:PdfSummaryPr
             ${title},
             ${pdfName}
         )
-        RETURNING *
+        RETURNING id, summary_text;
         `;
-    return result[0];
+    return savedSummary;
   } catch (error) {
     console.log("Error saving pdf", error);
     throw error;
   }
 }
 
-export async function saveSummaryToDatabase({pdfUrl,summary,title,pdfName}:PdfSummaryProps){
-    let savedSummary:any;  
-    try{
-        const {userId} =await auth();   
-        if(!userId){
+export async function saveSummaryToDatabase({
+  pdfUrl,
+  summary,
+  title,
+  pdfName,
+}: PdfSummaryProps) {
+  let savedSummary: any;
+  try {
+    const { userId } = await auth();
+    if (!userId) {
       return {
-                success:false,
-                message:"User not found",
-                data:null,
-            }
+        success: false,
+        message: "User not found",
+        data: null,
+      };
     }
+
     //assigning savePdfSummary to savedSummary
-        savedSummary=await savePdfSummary({userId,pdfUrl,summary,title,pdfName});
-        if(!savedSummary){
+    savedSummary = await savePdfSummary({
+      userId,
+      pdfUrl,
+      summary,
+      title,
+      pdfName,
+    });
+    if (!savedSummary) {
       return {
-                success:false,
-                message:"Summary saving failed, please try again...",
-                data:null,
-            }
+        success: false,
+        message: "Summary saving failed, please try again...",
+        data: null,
+      };
     }
-}
-    catch(error){
-        return {
-            success:false,
-            message:error instanceof Error ? error.message : "Error saving summary to database",
-            data:null,
-        }
-    }
-    
-    revalidatePath(`/summary/${savedSummary.id}`);
+  } catch (error) {
     return {
-            success:true,
-            message:"Summary saved successfully",
-            return:{
-                id:savedSummary.id,
-            }
-        }
+      success: false,
+      message:
+        error instanceof Error
+          ? error.message
+          : "Error saving summary to database",
+      data: null,
+    };
+  }
+
+  revalidatePath(`/summaries/${savedSummary.id}`);
+  redirect(`/summaries/${savedSummary.id}`);
+  return {
+    success: true,
+    message: "Summary saved successfully",
+    return: {
+      id: savedSummary.id,
+    },
+  };
 }

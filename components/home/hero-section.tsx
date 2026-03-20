@@ -1,6 +1,7 @@
 import { LayoutTextFlip } from "../ui/layout-text-flip";
 import { Button } from "../ui/button";
-import { Link, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
+import Link from "next/link";
 import { Badge } from "../ui/badge";
 import { AnimatedTooltip } from "../ui/animated-tooltip";
 import { BackgroundRippleEffect } from "../ui/background-ripple-effect";
@@ -54,58 +55,55 @@ export default function HeroSection() {
   return (
     <section className="relative w-full overflow-hidden bg-white/50 dark:bg-slate-950">
       <div className="relative flex min-h-screen w-full flex-col items-start justify-start overflow-hidden">
-      <BackgroundRippleEffect />
-      <div className="mt-24 w-full">
-        <div className="relative z-10 container mx-auto px-4 my-10 flex flex-col items-center text-center">
-        <div className="mb-8 flex justify-center">
-          <Badge
-            variant="outline"
-            className="relative cursor-default px-4 py-1.5 text-sm font-medium text-indigo-600 border-indigo-200 bg-indigo-50 hover:bg-indigo-100 transition-colors gap-2 rounded-full"
-          >
-            <Sparkles className="h-4 w-4 fill-indigo-600 text-indigo-600 animate-pulse" />
-            <span>Powered by AI</span>
-          </Badge>
-        </div>
+        <BackgroundRippleEffect />
+        <div className="mt-24 w-full">
+          <div className="relative z-10 container mx-auto px-4 my-10 flex flex-col items-center text-center">
+            <div className="mb-8 flex justify-center">
+              <Badge
+                variant="outline"
+                className="relative cursor-default px-4 py-1.5 text-sm font-medium text-indigo-600 border-indigo-200 bg-indigo-50 hover:bg-indigo-100 transition-colors gap-2 rounded-full"
+              >
+                <Sparkles className="h-4 w-4 fill-indigo-600 text-indigo-600 animate-pulse" />
+                <span>Powered by AI</span>
+              </Badge>
+            </div>
 
-        <h1 className="max-w-4xl text-2xl my-3 font-extrabold tracking-tight text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl mb-6 flex flex-col md:flex-row gap-3 items-center justify-center">
-          <span className="whitespace-nowrap">Transform PDFs into</span>
+            <h1 className="max-w-4xl text-2xl my-3 font-extrabold tracking-tight text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl mb-6 flex flex-col md:flex-row gap-3 items-center justify-center">
+              <span className="whitespace-nowrap">Transform PDFs into</span>
 
-          <span className="inline-flex color-indigo-600">
-            <LayoutTextFlip
-              text=""
-              words={["Concise", "Crispier", "Accurate","Compact"]}
-            />
-            <span className="ml-2 text-black">Summaries</span>
-          </span>
-        </h1>
+              <span className="inline-flex color-indigo-600">
+                <LayoutTextFlip
+                  text=""
+                  words={["Concise", "Crispier", "Accurate", "Compact"]}
+                />
+                <span className="ml-2 text-black">Summaries</span>
+              </span>
+            </h1>
 
-        <p className="mx-auto lg:text-xl md:text-lg sm:text-base max-w-2xl my-5 text-slate-600 dark:text-slate-400 mb-10 leading-relaxed">
-          Upload your documents and get instant, intelligent breakdowns of the
-          content in seconds.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center gap-4">
-          <Button 
-            size="lg"
-            className="hover:cursor-pointer h-12 lg:px-8 md:px-6 sm:px-4 text-white text-base bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-600/20 "
-          >
-            <Link/>
-            Try Summarix
-          </Button>
-        </div>
+            <p className="mx-auto lg:text-xl md:text-lg sm:text-base max-w-2xl my-5 text-slate-600 dark:text-slate-400 mb-10 leading-relaxed">
+              Upload your documents and get instant, intelligent breakdowns of
+              the content in seconds.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <Button
+                size="lg"
+                className="hover:cursor-pointer h-12 lg:px-8 md:px-6 sm:px-4 text-white text-base bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-600/20 "
+              >
+                <Link href="/sign-in">Try Summarix</Link>
+              </Button>
+            </div>
 
-        <div className="mt-16 flex flex-col items-center gap-4 text-sm text-slate-500">
-          <div className="flex flex-row items-center justify-center w-full mb-2">
-            <AnimatedTooltip items={people} />
+            <div className="mt-16 flex flex-col items-center gap-4 text-sm text-slate-500">
+              <div className="flex flex-row items-center justify-center w-full mb-2">
+                <AnimatedTooltip items={people} />
+              </div>
+              <p className="font-semibold">
+                Trusted by 1,000+ students and researchers
+              </p>
+            </div>
           </div>
-          <p className="font-semibold">
-            Trusted by 1,000+ students and researchers
-          </p>
         </div>
       </div>
-      </div>
-    </div>
-
-      
     </section>
   );
 }

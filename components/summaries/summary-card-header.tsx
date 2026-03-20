@@ -1,0 +1,32 @@
+import Link from "next/link";
+import { Button } from "../ui/button";
+import { Badge, ChevronLeft, Sparkles } from "lucide-react";
+
+export default function SummaryHeader({title}:{
+    title:string;
+}) {
+    return (
+
+        <div className="flex gap-4 mb-5 justify-between">
+            <div className="space-y-6">
+                <div>
+                    <Badge>
+                        <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-indigo-600 transition-transform duration-200 group-hover:translate-x-0.5"/>
+                        <span className=" font-medium text-xs sm:text-sm text-muted-foreground">AI Summary</span>
+                    </Badge>
+                </div>
+
+            </div>
+            <div>
+                <Link href="/summaries">
+                <Button variant="link"size="sm" className="group flex items-center gap-1 sm:gap-2 hover:bg-white/80 backdrop-blur-xs rounded-full transition-all duration-200 shadow-xs hover:shadow-md border border-indigo-100/30 bg-indigo-100 px-2 sm:px-3">
+                <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4 text-indigo-600 transition-transform duration-200 group-hover:translate-x-0.5"/>
+                <span className=" font-medium text-xs sm:text-sm text-muted-foreground">Back
+                <span className="hidden sm:inline"> to Summaries</span>
+                </span>
+                </Button>
+                </Link>
+            </div>
+        </div>
+    );
+}

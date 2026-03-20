@@ -1,5 +1,6 @@
 'use client'
 import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
+import Link from "next/link";
 
 const words = [
     {
@@ -35,9 +36,9 @@ export default function CTASection() {
       </p>
       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
         <button
-        onClick={()=>window.location.href="#pricing"}
+        
         className="hover:cursor-pointer w-40 h-11 rounded-xl bg-indigo-600 border dark:border-white border-transparent text-white text-lg mt-6">
-          Join now
+          <Link href="/sign-in">Join now</Link>
         </button>
       </div>
       </div>
