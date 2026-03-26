@@ -22,8 +22,8 @@ const plans: PriceType[] = [
       "Email support",
       "Standard processing speed",
     ],
-    paymentLink: "",
-    priceId: "",
+    paymentLink: process.env.NODE_ENV==="development"?"https://buy.stripe.com/test_dRm9AUbcaflxg6g3Vh5Rm00":"",
+    priceId: process.env.NODE_ENV==="development"?"price_1TECAKL9X4FkNLmMwi6UEtTg":"",
   },
   {
     id: "pro",
@@ -36,8 +36,8 @@ const plans: PriceType[] = [
       "24/7 priority support",
       "Markdown Export",
     ],
-    paymentLink: "",
-    priceId: "",
+    paymentLink: process.env.NODE_ENV==="development"?"https://buy.stripe.com/test_aFa3cw7ZY5KX1bmdvR5Rm01":"",
+    priceId: process.env.NODE_ENV==="development"?"price_1TECAKL9X4FkNLmMxawzY09H":"",
   },
 ];
 

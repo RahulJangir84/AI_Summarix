@@ -5,6 +5,9 @@ import Link from "next/link";
 import { Badge } from "../ui/badge";
 import { AnimatedTooltip } from "../ui/animated-tooltip";
 import { BackgroundRippleEffect } from "../ui/background-ripple-effect";
+import { auth } from "@clerk/nextjs/server";
+
+const {userId} = await auth();
 
 const people = [
   {
@@ -89,7 +92,11 @@ export default function HeroSection() {
                 size="lg"
                 className="hover:cursor-pointer h-12 lg:px-8 md:px-6 sm:px-4 text-white text-base bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-600/20 "
               >
-                <Link href="/sign-in">Try Summarix</Link>
+                {userId ? (
+                  <Link href="/upload">Try Summarix</Link>
+                ) : (
+                  <Link href="/sign-in">Try Summarix</Link>
+                )}
               </Button>
             </div>
 

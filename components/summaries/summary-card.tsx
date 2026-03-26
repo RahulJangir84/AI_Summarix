@@ -5,13 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
 
-interface Summary {
-  id: string;
-  title: string;
-  summary_text: string;
-  status: string;
-  created_at: string;
-}
+import { Summary } from "@/lib/summary";
 
 export default function SummaryCard({ summary }: { summary: Summary }) {
   return (

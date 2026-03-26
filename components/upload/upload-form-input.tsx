@@ -28,5 +28,4 @@ const UploadFormInput=forwardRef<HTMLFormElement,UploadFormInputProps>(({onSubmi
 );
 
 UploadFormInput.displayName="UploadFormInput";
-
 export default UploadFormInput;

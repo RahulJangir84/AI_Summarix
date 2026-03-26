@@ -38,11 +38,7 @@ export async function generatePdfSummary(
     };
   }
 
-  const {
-    serverData: {
-      file: { url: pdfUrl, name: pdfName },
-    },
-  } = uploadResponse[0];
+const { url: pdfUrl, name: pdfName } = uploadResponse[0].serverData.file;
 
   if (!pdfUrl) {
     return {
