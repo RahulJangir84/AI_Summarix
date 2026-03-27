@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ArrowRight, CheckIcon } from "lucide-react";
+import constants from "@/utils/constants";
 
 type PriceType = {
   id: string;
@@ -11,35 +12,7 @@ type PriceType = {
   priceId: string;
 };
 
-const plans: PriceType[] = [
-  {
-    id: "basic",
-    title: "Basic",
-    price: 9,
-    description: "Perfect for occasional use",
-    items: [
-      "5 PDFs summaries per month",
-      "Email support",
-      "Standard processing speed",
-    ],
-    paymentLink: process.env.NODE_ENV==="development"?"https://buy.stripe.com/test_dRm9AUbcaflxg6g3Vh5Rm00":"",
-    priceId: process.env.NODE_ENV==="development"?"price_1TECAKL9X4FkNLmMwi6UEtTg":"",
-  },
-  {
-    id: "pro",
-    title: "Pro",
-    price: 19,
-    description: "For professionals and teams",
-    items: [
-      "Unlimited PDF summaries",
-      "Priority processing",
-      "24/7 priority support",
-      "Markdown Export",
-    ],
-    paymentLink: process.env.NODE_ENV==="development"?"https://buy.stripe.com/test_aFa3cw7ZY5KX1bmdvR5Rm01":"",
-    priceId: process.env.NODE_ENV==="development"?"price_1TECAKL9X4FkNLmMxawzY09H":"",
-  },
-];
+const data=constants();
 
 const PricingCard = ({
   price,
@@ -121,7 +94,7 @@ export default function PricingSection() {
         </div>
 
         <div className="relative flex justify-center flex-col lg:flex-row items-center lg:items-stretch gap-8">
-          {plans.map((plan) => (
+          {data.plans.map((plan) => (
             <PricingCard key={plan.id} {...plan} />
           ))}
         </div>

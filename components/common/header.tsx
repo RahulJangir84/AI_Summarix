@@ -10,7 +10,7 @@ import { SignedIn,SignedOut,UserButton } from "@clerk/nextjs";
 const hoverUnderline =
   "relative text-slate-900 after:absolute after:left-1/2 after:-bottom-1 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-indigo-600 after:transition-all after:duration-300 hover:after:w-full";
 
-export default function Header() {
+export default function Header({ planBadge }: { planBadge?: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -79,7 +79,7 @@ export default function Header() {
             >
               Upload a PDF
             </NavLink>
-            <div className="text-xl font-medium text-slate-900 cursor-pointer">Pro</div>
+            {planBadge}
             <SignedIn>
               <UserButton />
             </SignedIn> 

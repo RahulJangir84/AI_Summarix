@@ -10,7 +10,7 @@ export default function EmptySummary() {
         Upload your pdf to summarize
       </p>
       <Link href="/upload" className="mt-4">
-        <Button className="bg-indigo-600 hover:bg-indigo-700 ">
+        <Button className="bg-indigo-600 hover:bg-indigo-700 cursor-pointer">
           Upload PDF
         </Button>
       </Link>

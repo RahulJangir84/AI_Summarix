@@ -6,7 +6,8 @@ import { getSummaries } from "@/lib/summary";
 import { currentUser} from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import EmptySummary from "@/components/summaries/empty-summary";
-const uploadLimit = 5;  
+import { hasReachedUploadLimit } from "@/lib/user";
+
 
 export default async function Dashboard() {
     const user=await currentUser();
@@ -15,6 +16,11 @@ export default async function Dashboard() {
         return redirect('/sign-in');
     }
     const summaries = await getSummaries(userId);
+    const email=user?.emailAddresses?.[0]?.emailAddress;
+    if(!email){
+        return redirect('/sign-in');
+    }
+    const {hasReachedLimit,currentCount,limit,planName}=await hasReachedUploadLimit(userId,email);
   return (
     <main className="min-h-screen pt-5">
       <div className="flex flex-col gap-3 mx-auto justify-center items-center">
@@ -31,21 +37,21 @@ export default async function Dashboard() {
             <div className="mt-5">
               <div className="flex gap-4">
 
-                <Button
+                {!hasReachedLimit&&<Button
                   size="lg"
                   className="hover:cursor-pointer h-10 lg:px-6 md:px-5 sm:px-3 text-white text-base bg-indigo-600/90 hover:bg-indigo-700 shadow-lg shadow-indigo-600/20 "
                 >
                   <Link className="flex items-center" href="/upload"><Plus className="mr-2 h-4 w-4" />New Summary</Link>
-                </Button>
+                </Button>}
               </div>
             </div>
           </div>
         <div className="mb-6 bg-indigo-100 border border-indigo-200 rounded-lg p-4 text-indigo-800">
             <div className="text-sm">
-            <p>You&apos;ve reached the limit of {uploadLimit} uploads on the Basic plan.
-                <Link href="/#pricing" className="underline text-indigo-800 font-medium underline-offset-4 inline-flex items-center">Upgrade to a pro{' '}
+            <p>You&apos;ve used {currentCount} out of {limit} uploads on the {" "} {planName??"Free"} Plan 
+                <Link href="/#pricing" className="underline text-indigo-800 font-medium underline-offset-4 ml-1 inline-flex items-center">Upgrade to a pro{' '}
                 <ArrowRight className="w-4 h-4 inline-block"></ArrowRight>
-                </Link>
+                </Link >
                 {' '}for unlimited uploads.
             </p>
 
