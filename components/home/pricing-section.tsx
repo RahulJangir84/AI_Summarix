@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ArrowRight, CheckIcon } from "lucide-react";
-import constants from "@/utils/constants";
-
+import constants, { containerVariants, itemVariants } from "@/utils/constants";
+import { MotionDiv, MotionSection } from "../common/motion";
 type PriceType = {
   id: string;
   title: string;
@@ -12,7 +12,7 @@ type PriceType = {
   priceId: string;
 };
 
-const data=constants();
+const data = constants();
 
 const PricingCard = ({
   price,
@@ -25,7 +25,7 @@ const PricingCard = ({
   const isPro = id === "pro";
 
   return (
-    <div className="relative w-full max-w-lg">
+    <MotionDiv variants={itemVariants} className="relative w-full max-w-lg">
       {isPro && (
         <div className="absolute -inset-1 rounded-2xl bg-indigo-500/20 blur-lg" />
       )}
@@ -36,7 +36,7 @@ const PricingCard = ({
           "bg-white hover:-translate-y-1 hover:shadow-xl",
           isPro
             ? "border-indigo-500 border-2 shadow-indigo-500/20"
-            : "border-gray-200 shadow-black/5"
+            : "border-gray-200 shadow-black/5",
         )}
       >
         <div className="flex justify-between items-center gap-4">
@@ -72,21 +72,28 @@ const PricingCard = ({
               "inline-flex w-full items-center justify-center gap-2 rounded-full py-2 border-2 transition-all",
               isPro
                 ? "bg-indigo-600 text-white hover:bg-indigo-700"
-                : "border-gray-300 hover:border-indigo-500 hover:text-indigo-600"
+                : "border-gray-300 hover:border-indigo-500 hover:text-indigo-600",
             )}
           >
             Buy Now <ArrowRight />
           </a>
         </div>
       </div>
-    </div>
+    </MotionDiv>
   );
 };
 
 export default function PricingSection() {
   return (
-    <section className="relative overflow-hidden" id="pricing">
-      <div className="py-12 lg:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 lg:pt-18">
+    <MotionSection
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.25 }}
+      className="relative overflow-hidden"
+      id="pricing"
+    >
+      <div className="py-12 lg:py-15 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 lg:pt-15">
         <div className="flex items-center justify-center font-bold w-full pb-12">
           <h2 className="text-xl uppercase text-indigo-600 font-bold">
             Pricing
@@ -99,6 +106,6 @@ export default function PricingSection() {
           ))}
         </div>
       </div>
-    </section>
+    </MotionSection>
   );
 }

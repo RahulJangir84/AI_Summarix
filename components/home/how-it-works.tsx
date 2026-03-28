@@ -1,6 +1,7 @@
 import { BrainCircuit, FileOutput, FileText, MoveRight } from "lucide-react";
 import { ReactNode } from "react";
-
+import { containerVariants, itemVariants } from "@/utils/constants";
+import { MotionSection, MotionDiv } from "../common/motion";
 type Step = {
   icon: ReactNode;
   label: string;
@@ -26,9 +27,15 @@ export default function HowItWorksSection() {
     },
   ];
   return (
-    <section className="relative overflow-hidden">
+    <MotionSection
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.55 }}
+      className="relative overflow-hidden pt-4"
+    >
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-white to-indigo-100" />
+      <div className="absolute inset-0 bg-gradient-to-r from-indigo-50 via-white to-indigo-100" />
 
       {/* Gradient Blobs */}
       <div className="absolute -top-32 -left-32 h-80 w-80 rounded-full bg-indigo-400/20 blur-3xl" />
@@ -45,7 +52,11 @@ export default function HowItWorksSection() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto relative">
           {steps.map((step, index) => (
-            <div key={index} className="relative flex items-stretch">
+            <MotionDiv
+              variants={itemVariants}
+              key={index}
+              className="relative flex items-stretch"
+            >
               <StepItem {...step} />
               {index < steps.length - 1 && (
                 <div className="hidden md:block absolute top-1/2 -right-8 transform -translate-y-1/2 z-10">
@@ -56,11 +67,11 @@ export default function HowItWorksSection() {
                   ></MoveRight>
                 </div>
               )}
-            </div>
+            </MotionDiv>
           ))}
         </div>
       </div>
-    </section>
+    </MotionSection>
   );
 }
 

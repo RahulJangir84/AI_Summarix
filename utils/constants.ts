@@ -47,14 +47,11 @@ export default function pricingPlans() {
 export const containerVariants = {
   hidden: {
     opacity: 0,
-    y: 20,
   },
   visible: {
     opacity: 1,
-    y: 0,
     transition: {
-      duration: 0.5,
-      staggerChildren: 0.2,
+      staggerChildren: 0.15,
       delayChildren: 0.1,
     },
   },
@@ -64,14 +61,17 @@ export const itemVariants = {
   hidden: {
     opacity: 0,
     y: 20,
+    scale: 0.95,
   },
   visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
-      stiffness: 50,
-      damping: 15,
-      duration: 0.8,
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 20,
+      mass: 1,
     },
   },
 };
