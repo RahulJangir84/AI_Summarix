@@ -18,19 +18,17 @@ interface PdfSummaryProps {
 }
 
 export async function generatePdfSummary(
-  uploadResponse: [
-    {
-      serverData: {
-        userId: string;
-        file: {
-          url: string;
-          name: string;
-        };
+  uploadResponse: {
+    serverData: {
+      userId: string;
+      file: {
+        url: string;
+        name: string;
       };
-    },
-  ],
+    };
+  }[],
 ) {
-  if (!uploadResponse) {
+  if (!uploadResponse || uploadResponse.length === 0) {
     return {
       success: false,
       message: "File upload failed",

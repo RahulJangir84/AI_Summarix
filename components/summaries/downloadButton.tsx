@@ -38,7 +38,7 @@ export default function DownloadButton({
                 padding: 40px;
                 margin: 0;
               }
-              h1 { color: #4f46e5; font-size: 28px; margin-bottom: 10px; }
+              h1 { color: #4f46e5; font-size: 25px; margin-bottom: 10px; }
               .meta-box {
                 color: #666; font-size: 14px; margin-bottom: 30px;
                 border-bottom: 1px solid #eee; padding-bottom: 20px;

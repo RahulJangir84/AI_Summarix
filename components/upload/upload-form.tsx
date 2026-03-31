@@ -74,7 +74,7 @@ export default function UploadForm() {
       // File uploads directly to CDN
       // Final file URL is returned
       const resp = await startUpload([file]);
-      if (!resp) {
+      if (!resp || resp.length === 0) {
         toast.error("Something went wrong", {
           description: "Please try again with a different file",
         });

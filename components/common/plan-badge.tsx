@@ -6,7 +6,8 @@ import { Crown } from "lucide-react";
 import { cn } from "@/lib/utils";
 export default async function PlanBadge() {
     const user =await currentUser();
-    if(!user?.id){
+
+    if(!user){
         return null;
     }
     const email=user?.emailAddresses?.[0]?.emailAddress;

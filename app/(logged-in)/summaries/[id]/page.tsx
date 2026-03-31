@@ -2,6 +2,8 @@ import SummaryHeader from "@/components/summaries/summary-card-header";
 import { getSummaryById } from "@/lib/summary";
 import SourceInfo from "@/components/summaries/source-info";
 import SummarySlider from "@/components/summaries/summary-slider";
+import ChatWidget from "@/components/chat/chat-widget";
+
 export default async function Page({params,}: {
   params: Promise<{ id: string }>;
 }){
@@ -26,6 +28,7 @@ export default async function Page({params,}: {
                 <SourceInfo original_file_url={original_file_url} file_name={file_name} title={title} summary_text={summary_text} created_at={created_at.toDateString()}/>
                 <SummarySlider summary={summary_text}/>
             </div>
+            <ChatWidget summaryText={summary_text} />
         </div>
     </div>
   );

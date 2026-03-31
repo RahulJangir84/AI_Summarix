@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin } from "lucide-react";
+import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="border-t border-gray-200/20 backdrop-blur-xl bg-gradient-to-r from-[#302196] bg-[#23186f]">
@@ -16,10 +17,10 @@ export default function Footer() {
           <h3 className="font-semibold text-xl text-gray-200 dark:text-white mb-3">
             Product
           </h3>
-          <ul className="space-y-3 text-md text-gray-300 dark:text-gray-400">
-            <li className="hover:text-indigo-600 cursor-pointer">Pricing</li>
-            <li className="hover:text-indigo-600 cursor-pointer">Upload PDF</li>
-            <li className="hover:text-indigo-600 cursor-pointer">Your Summaries</li>
+          <ul className="flex flex-col space-y-3 text-md text-gray-300 dark:text-gray-400">
+            <Link href="/#pricing" className="hover:text-indigo-600 cursor-pointer">Pricing</Link>
+            <Link href="/upload" className="hover:text-indigo-600 cursor-pointer">Upload PDF</Link>
+            <Link href="/dashboard" className="hover:text-indigo-600 cursor-pointer">Your Summaries</Link>
           </ul>
         </div>
 

@@ -4,6 +4,7 @@ import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-w
 import { hasReachedUploadLimit } from "@/lib/user";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { MessageSquareWarning } from "lucide-react";
 export default async function Page() {
   const user=await currentUser();
   const userId=user?.id;
@@ -24,6 +25,12 @@ export default async function Page() {
         <div className="flex flex-col items-center justify-center text-center gap-6">
         <UploadHeader />
         <UploadForm />
+        <div className="mt-2">
+          <div className="flex items-center gap-2">
+            <MessageSquareWarning className="w-4 h-4 text-gray-600" />
+            <p className="text-sm text-gray-600">You will automatically redirected to dashboard after successful upload</p>
+          </div>
+        </div>
         </div>
       </BackgroundBeamsWithCollision>
     </section>

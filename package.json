@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.54",
+    "@ai-sdk/react": "^3.0.143",
     "@clerk/nextjs": "^6.36.5",
     "@google/generative-ai": "^0.24.1",
     "@langchain/community": "^1.1.2",
@@ -21,6 +23,7 @@
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.9.1",
     "@uploadthing/react": "^7.3.3",
+    "ai": "^6.0.141",
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.9.0",
     "clsx": "^2.1.1",

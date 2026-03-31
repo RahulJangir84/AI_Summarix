@@ -10,7 +10,7 @@ export default function SourceInfo({original_file_url,file_name,title,summary_te
     created_at:string;
 }) {
     return (
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-12 text-sm text-muted-foreground">
+        <div className="flex flex-col pt-5 lg:flex-row items-center justify-center gap-12 text-sm text-muted-foreground">
             <div className="flex items-center justify-center gap-2">
                 <FileText className="h-4 w-4" />
                 <p className="text-[16px]">Source:{file_name}</p>

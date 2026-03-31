@@ -31,7 +31,7 @@ export default function HowItWorksSection() {
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.55 }}
+      viewport={{ once: true, amount: 0.35 }}
       className="relative overflow-hidden pt-4"
     >
       {/* Background */}
