@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import NavLink from "./nav-link";
 import { cn } from "@/lib/utils";
-import { SignedIn,SignedOut,UserButton } from "@clerk/nextjs";
-
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { ModeToggle } from "../toggle";
 
 const hoverUnderline =
   "relative text-slate-900 after:absolute after:left-1/2 after:-bottom-1 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-indigo-600 after:transition-all after:duration-300 hover:after:w-full";
@@ -18,29 +18,27 @@ export default function Header({ planBadge }: { planBadge?: React.ReactNode }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-
-
   return (
     <header className="fixed top-2 left-0 right-0 z-50">
       <nav
         className={cn(
           "mx-auto flex max-w-6xl items-center justify-between px-4 py-2 transition-all duration-300",
           scrolled
-            ? "mt-3 rounded-full bg-white/80 backdrop-blur-md shadow-md shadow-black/5 border-b-2 border-indigo-400"
-            : "bg-transparent"
+            ? "mt-3 rounded-full dark:bg-[#10112A] bg-white/80 backdrop-blur-md shadow-md shadow-black/5 border-b-2 border-indigo-400"
+            : "bg-transparent",
         )}
       >
         {/* Logo */}
         <NavLink
           href="/"
-          className="flex items-center gap-2 text-xl font-semibold text-slate-900 hover:text-black"
+          className="flex dark:text-blue-200/80 items-center gap-2 text-xl font-semibold text-slate-900 hover:text-black"
         >
           <Image
             src="/logo.png"
             alt="Summarix"
             width={35}
             height={35}
-            className="transition-transform duration-300 hover:rotate-6"
+            className="transition-transform dark:invert duration-300 hover:rotate-6"
           />
           Summarix
         </NavLink>
@@ -50,21 +48,23 @@ export default function Header({ planBadge }: { planBadge?: React.ReactNode }) {
           <NavLink
             href="#pricing"
             className={cn(
-              "text-xl font-medium text-slate-900",
-              hoverUnderline
+              "text-xl font-medium text-slate-900 dark:text-blue-200/80",
+              hoverUnderline,
             )}
           >
             Pricing
           </NavLink>
           <SignedIn>
-          <NavLink href="/dashboard" className={cn(
-            "text-xl font-medium text-slate-900",
-            hoverUnderline
-          )}
-          >
-            Your Summaries
-          </NavLink>
-            </SignedIn>
+            <NavLink
+              href="/dashboard"
+              className={cn(
+                "text-xl font-medium text-slate-900 dark:text-blue-200/80",
+                hoverUnderline,
+              )}
+            >
+              Your Summaries
+            </NavLink>
+          </SignedIn>
         </div>
 
         {/* Right */}
@@ -73,8 +73,8 @@ export default function Header({ planBadge }: { planBadge?: React.ReactNode }) {
             <NavLink
               href="/upload"
               className={cn(
-                "text-xl font-medium text-slate-900 transition-colors mr-7",
-                hoverUnderline
+                "text-xl font-medium text-slate-900 dark:text-blue-200/80 transition-colors mr-7",
+                hoverUnderline,
               )}
             >
               Upload a PDF
@@ -82,20 +82,23 @@ export default function Header({ planBadge }: { planBadge?: React.ReactNode }) {
             {planBadge}
             <SignedIn>
               <UserButton />
-            </SignedIn> 
+            </SignedIn>
           </div>
-          </SignedIn>
-          <SignedOut>
+        </SignedIn>
+        <SignedOut>
           <div className="flex items-center gap-6">
-          <NavLink
-            href="/sign-in"
-            className={cn(
-              "text-xl font-medium text-slate-900 transition-colors",
-              hoverUnderline )}>
-            Sign In
-          </NavLink>
-        </div>
-      </SignedOut>
+            <NavLink
+              href="/sign-in"
+              className={cn(
+                "text-xl font-medium text-slate-900 dark:text-blue-200/80 transition-colors",
+                hoverUnderline,
+              )}
+            >
+              Sign In
+            </NavLink>
+          </div>
+        </SignedOut>
+        <ModeToggle />
       </nav>
     </header>
   );

@@ -51,9 +51,9 @@ export default function DeleteButton({ summaryId }: deleteSummaryProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="text-gray-400 bg-gray-100 hover:text-indigo-700 hover:bg-indigo-300"
+          className="text-gray-400 bg-gray-100 hover:text-indigo-700 hover:bg-indigo-300 dark:bg-red-700/80 dark:hover:bg-red-500/70"
         >
-          <Trash2 className="h-4 w-4" />
+          <Trash2 className="h-4 w-4 dark:text-black " />
         </Button>
       </DialogTrigger>
       <DialogContent>

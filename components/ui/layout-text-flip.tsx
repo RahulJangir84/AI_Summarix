@@ -35,7 +35,7 @@ export const LayoutTextFlip = ({
         className="relative inline-flex overflow-hidden rounded-md 
                    border border-transparent bg-white px-2 py-1 
                    font-bold shadow-sm ring-1 ring-black/10 text-indigo-600
-                   dark:bg-neutral-900 dark:text-indigo-400 dark:ring-white/10"
+                   dark:bg-neutral-800 dark:text-indigo-400/90 dark:ring-white/10"
       >
         <AnimatePresence mode="popLayout">
           <motion.span

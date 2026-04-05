@@ -27,8 +27,8 @@ export default async function Page() {
         <UploadForm />
         <div className="mt-2">
           <div className="flex items-center gap-2">
-            <MessageSquareWarning className="w-4 h-4 text-gray-600" />
-            <p className="text-sm text-gray-600">You will automatically redirected to dashboard after successful upload</p>
+            <MessageSquareWarning className="w-4 h-4 text-gray-600 dark:text-slate-400" />
+            <p className="text-sm dark:text-slate-400 text-gray-600">You will automatically redirected to dashboard after successful upload</p>
           </div>
         </div>
         </div>

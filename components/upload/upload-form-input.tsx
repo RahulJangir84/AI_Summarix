@@ -14,8 +14,8 @@ const UploadFormInput=forwardRef<HTMLFormElement,UploadFormInputProps>(({onSubmi
   return (
     <form className="flex flex-col gap-6 mt-4" onSubmit={onSubmit} ref={ref}>
       <div className="flex justify-end items-center gap-4">
-        <Input type="file" accept="application/pdf" name="file" id="file" required disabled={isLoading} className={isLoading ? 'cursor-not-allowed opacity-50' : ''} />
-        <Button className="bg-indigo-600 hover:bg-indigo-700" disabled={isLoading}>
+        <Input type="file" accept="application/pdf" name="file" id="file" required disabled={isLoading} className={`isLoading ? 'cursor-not-allowed opacity-50' : '' , border-slate-600`} />
+        <Button className="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-300 dark:hover:bg-indigo-400 cursor-pointer" disabled={isLoading}>
           {isLoading ?
           (<> <Loader2 className="mr-2 h-4 w-4 animate-spin"/>Processing...</> 
             )

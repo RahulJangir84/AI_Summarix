@@ -71,16 +71,23 @@ export default function HeroSection() {
             <div className="mb-8 flex justify-center">
               <Badge
                 variant="outline"
-                className="relative cursor-default px-4 py-1.5 text-sm font-medium text-indigo-600 border-indigo-200 bg-indigo-50 hover:bg-indigo-100 transition-colors gap-2 rounded-full"
+                className="relative cursor-default px-4 py-1.5 text-sm font-medium 
+    text-indigo-600 border-indigo-200 bg-indigo-50 hover:bg-indigo-100 
+    dark:text-slate-300 dark:border-slate-700 dark:bg-slate-900 
+    dark:hover:bg-slate-800 transition-colors gap-2 rounded-full"
               >
-                <Sparkles className="h-4 w-4 fill-indigo-600 text-indigo-600 animate-pulse" />
-                <span>Powered by AI</span>
+                <Sparkles
+                  className="h-4 w-4 fill-indigo-600 text-indigo-600 
+    dark:fill-slate-400 dark:text-slate-400 animate-pulse"
+                />
+
+                <span className="dark:text-slate-300">Powered by AI</span>
               </Badge>
             </div>
 
             <MotionH1
               variants={itemVariants}
-              className="max-w-4xl text-2xl my-3 font-extrabold tracking-tight text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl mb-6 flex flex-col md:flex-row gap-3 items-center justify-center"
+              className="max-w-4xl text-2xl my-3 font-extrabold tracking-tight dark:text-[#d2d2d7] text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl mb-6 flex flex-col md:flex-row gap-3 items-center justify-center"
             >
               <span className="whitespace-nowrap">Transform PDFs into</span>
 
@@ -89,13 +96,15 @@ export default function HeroSection() {
                   text=""
                   words={["Concise", "Crispier", "Accurate", "Compact"]}
                 />
-                <span className="ml-2 text-black">Summaries</span>
+                <span className="ml-2 text-black dark:text-[#d2d2d7]">
+                  Summaries
+                </span>
               </span>
             </MotionH1>
 
             <MotionP
               variants={itemVariants}
-              className="mx-auto lg:text-xl md:text-lg sm:text-base max-w-2xl my-5 text-slate-600 dark:text-slate-400 mb-10 leading-relaxed"
+              className="mx-auto lg:text-xl md:text-lg sm:text-base max-w-2xl my-5 text-slate-600 dark:text-slate-100/80 mb-10 leading-relaxed"
             >
               Upload your documents and get instant, intelligent breakdowns of
               the content in seconds.
@@ -106,10 +115,14 @@ export default function HeroSection() {
             >
               <Button
                 size="lg"
-                className="hover:cursor-pointer h-12 lg:px-8 md:px-6 sm:px-4 text-white text-base bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-600/20 "
+                className="hover:cursor-pointer h-12 lg:px-8 md:px-6 sm:px-4 
+text-white text-base 
+bg-slate-800 hover:bg-slate-700 
+dark:bg-[#707be0] dark:text-slate-900 dark:hover:bg-[#7882E3]/80 
+shadow-md"
               >
                 {userId ? (
-                  <Link href="/upload">Try Summarix</Link>
+                  <Link href="/upload" className="text-[17wpx]">Try Summarix</Link>
                 ) : (
                   <Link href="/sign-in">Try Summarix</Link>
                 )}

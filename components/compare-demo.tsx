@@ -1,13 +1,14 @@
-import React from "react";
+"use client";
 import { Compare } from "@/components/ui/compare";
-
+import { useTheme } from "next-themes";
 export default function CompareDemo() {
+  const { theme } = useTheme();
   return (
     <div className="flex flex-col gap-1">
-    <div className="p-4 border rounded-3xl bg-white border-neutral-200 dark:border-neutral-800 px-4">
+    <div className="p-4 border rounded-3xl bg-white dark:bg-indigo-900 border-neutral-200 dark:border-neutral-800 px-4">
       <Compare
-        firstImage="/image.png"
-        secondImage="/image2.png"
+        firstImage={theme === "dark" ? "/image copy 2.png" : "/image.png"}
+        secondImage={theme === "dark" ? "/image copy.png" : "/image2.png"}
         firstImageClassName="object-cover object-left-top"
         secondImageClassname="object-cover object-left-top"
         className="h-[250px] w-[200px] md:h-[450px] md:w-[700px]"

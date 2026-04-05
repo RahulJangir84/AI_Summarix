@@ -21,8 +21,8 @@ export default function SourceInfo({original_file_url,file_name,title,summary_te
                 size="sm"
                 asChild
                 >
-                <a href={original_file_url} className="text-2xl" target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-5 w-5 mr-1" />
+                <a href={original_file_url} className="text-2xl dark:text-blue-400" target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-5 w-5 mr-1 dark:text-blue-400" />
                     View Original
                 </a>
                 </Button>

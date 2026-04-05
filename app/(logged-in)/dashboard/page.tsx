@@ -22,15 +22,15 @@ export default async function Dashboard() {
     }
     const {hasReachedLimit,currentCount,limit,planName}=await hasReachedUploadLimit(userId,email);
   return (
-    <main className="min-h-screen pt-5">
-      <div className="flex flex-col gap-3 mx-auto justify-center items-center">
-        <div className="px-17 w-full py-12 sm:py-24">
+    <main className="min-h-screen pt-5 bg-linear-to-b dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 dark:via-80% ">
+      <div className="flex flex-col gap-3 mx-auto justify-center items-center ">
+        <div className="px-17 w-full py-12 sm:py-24 ">
           <div className="flex gap-4 w-full mb-8 justify-between">
             <div className="flex flex-col gap-3">
-              <h1 className="text-5xl font-bold tracking-tight bg-linear-to-r from-gray-600 to-gray-900 bg-clip-text text-transparent">
+              <h1 className="text-5xl font-bold tracking-tight bg-linear-to-r from-gray-600 to-gray-900 bg-clip-text dark:text-[#D2D2D7] text-transparent">
                 Your summaries
               </h1>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-gray-600 dark:text-slate-300">
                 All the summaries you&apos;ve created will appear here
               </p>
             </div>
@@ -39,9 +39,9 @@ export default async function Dashboard() {
 
                 {!hasReachedLimit&&<Button
                   size="lg"
-                  className="hover:cursor-pointer h-10 lg:px-6 md:px-5 sm:px-3 text-white text-base bg-indigo-600/90 hover:bg-indigo-700 shadow-lg shadow-indigo-600/20 "
+                  className="hover:cursor-pointer h-10 lg:px-6 md:px-5 sm:px-3 text-white text-base bg-indigo-600/90 hover:bg-indigo-700 dark:bg-[#a5b4fc] dark:hover:bg-[#8490f8] shadow-lg shadow-indigo-600/20 "
                 >
-                  <Link className="flex items-center" href="/upload"><Plus className="mr-2 h-4 w-4" />New Summary</Link>
+                  <Link className="flex items-center dark:text-slate-900" href="/upload"><Plus className="mr-2 h-4 w-4" />New Summary</Link>
                 </Button>}
               </div>
             </div>

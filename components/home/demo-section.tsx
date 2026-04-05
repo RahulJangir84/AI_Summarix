@@ -9,8 +9,8 @@ export default function DemoSection() {
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.05 }}
-      className="relative flex justify-center items-center overflow-hidden bg-gradient-to-l from-indigo-100 via-white to-indigo-200/70 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950"
+      viewport={{ once: true, amount: 0.005 }}
+      className="relative flex justify-center items-center overflow-hidden bg-gradient-to-l from-indigo-100 via-white to-indigo-200/70 dark:bg-gradient-to-tl dark:from-[#020618] dark:via-[#020618] dark:to-[#020618] dark:via-75%"
     >
         
       <div className="py-7 lg:pt-8 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,9 +23,9 @@ export default function DemoSection() {
             <Pizza className="w-6 h-6 text-indigo-600" />
           </MotionDiv>
           <MotionDiv variants={itemVariants} className="text-center mb-14">
-            <h3 className="text-3xl max-w-3xl font-bold mx-auto px-4 sm:px-6">
+            <h3 className="text-3xl max-w-3xl font-bold mx-auto px-4 sm:px-6 dark:text-[#d2d2d7]">
               Watch how Summarix can help you to transform{" "}
-              <span className="text-indigo-600">this next.js course PDF </span>
+              <span className="text-indigo-600 dark:text-indigo-400/90">this next.js course PDF </span>
               into an easy-to-read summary!
             </h3>
           </MotionDiv>

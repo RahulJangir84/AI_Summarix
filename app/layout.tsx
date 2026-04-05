@@ -7,6 +7,8 @@ import PlanBadge from "@/components/common/plan-badge";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
 import { Suspense } from "react";
+import { ThemeProvider } from "next-themes";
+import NextTopLoader from "nextjs-toploader";
 const fontSans = FontSans({
   variable: "--font-sans",
   subsets: ["latin"],
@@ -34,10 +36,16 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
       <html lang="en" className="scroll-smooth">
         <body
           className={`font-sans ${fontSans.variable} ${robotoFlex.variable} antialiased`}
         >
+          <NextTopLoader
+          color="#2299DD"        
+          height={3}            
+          showSpinner={false}  
+        />
           <div className="relative flex flex-col min-h-screen">
             <Header 
               planBadge={
@@ -50,8 +58,10 @@ export default function RootLayout({
             <Footer />
           </div>
           <Toaster />
+          {/* <div className="noise-overlay fixed inset-0 z-[100] opacity-2 pointer-events-none" /> */}
         </body>
       </html>
+      </ThemeProvider>
     </ClerkProvider>
   );
 }
