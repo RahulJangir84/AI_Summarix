@@ -20,10 +20,10 @@ export default function DemoSection() {
             variants={itemVariants}
             className="inline-flex items-center justify-center p-2 rounded-2xl bg-gray-100/80 backdrop-blur-xs mx-auto px-4 sm:px-6"
           >
-            <Pizza className="w-6 h-6 text-indigo-600" />
+            <Pizza className="lg:w-6 lg:h-6 w-4 h-4 text-indigo-600" />
           </MotionDiv>
           <MotionDiv variants={itemVariants} className="text-center mb-14">
-            <h3 className="text-3xl max-w-3xl font-bold mx-auto px-4 sm:px-6 dark:text-[#d2d2d7]">
+            <h3 className="lg:text-3xl md:text-2xl sm:text-xl text-xl max-w-3xl font-bold mx-auto px-4 sm:px-6 dark:text-[#d2d2d7]">
               Watch how Summarix can help you to transform{" "}
               <span className="text-indigo-600 dark:text-indigo-400/90">this next.js course PDF </span>
               into an easy-to-read summary!

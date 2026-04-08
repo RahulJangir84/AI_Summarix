@@ -116,12 +116,12 @@ export default function DownloadButton({
         disabled={isDownloading}
       >
         {isDownloading ? (
-          <Loader2 className="mr-1 h-4 w-4 text-indigo-600 animate-spin dark:text-blue-400" />
+          <Loader2 className="mr-1 lg:h-4 lg:w-4 md:h-4 md:w-4 sm:w-4 sm:h-4 h-3 w-3 text-indigo-600 animate-spin dark:text-blue-400" />
         ) : (
-          <Download className="mr-1 h-4 w-4 text-indigo-600 dark:text-blue-400 transition-transform duration-300 group-hover:-translate-x-1" />
+          <Download className="mr-1 lg:h-4 lg:w-4 md:h-4 md:w-4 sm:w-4 sm:h-4 h-3 w-3 text-indigo-600 dark:text-blue-400 transition-transform duration-300 group-hover:-translate-x-1" />
         )}
 
-        <span className="text-[16px] font-medium text-indigo-600 dark:text-blue-400">
+        <span className="lg:text-[16px] md:text-[14px] sm:text-[13px] text-[12px] font-medium text-indigo-600 dark:text-blue-400">
           {isDownloading ? "Preparing PDF..." : "Download"} <span className="hidden sm:inline">Summary</span>
         </span>
       </Button>

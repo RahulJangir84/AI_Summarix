@@ -11,7 +11,7 @@ export default function CompareDemo() {
         secondImage={theme === "dark" || theme === "system" ? "/imagecopy.png" : "/image2.png"}
         firstImageClassName="object-cover object-left-top"
         secondImageClassname="object-cover object-left-top"
-        className="h-[250px] w-[200px] md:h-[450px] md:w-[700px]"
+        className="h-[340px] w-[360px] lg:h-[460px] lg:w-[700px] sm:h-[350px] sm:w-[470px] md:h-[450px] md:w-[570px]"
         slideMode="hover"
       />
     </div>

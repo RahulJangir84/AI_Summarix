@@ -12,9 +12,8 @@ export default function HowItWorksSection() {
     {
       icon: (
         <FileText
-          size={64}
           strokeWidth={1.5}
-          className="dark:text-indigo-400/90"
+          className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 dark:text-indigo-400/90"
         />
       ),
       label: "Upload PDF",
@@ -23,9 +22,8 @@ export default function HowItWorksSection() {
     {
       icon: (
         <BrainCircuit
-          size={64}
           strokeWidth={1.5}
-          className="dark:text-indigo-400/90"
+           className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 dark:text-indigo-400/90"
         />
       ),
       label: "AI Analysis",
@@ -35,9 +33,8 @@ export default function HowItWorksSection() {
     {
       icon: (
         <FileOutput
-          size={64}
           strokeWidth={1.5}
-          className="dark:text-indigo-400/90"
+           className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 dark:text-indigo-400/90"
         />
       ),
       label: "Get Summary",
@@ -63,7 +60,7 @@ export default function HowItWorksSection() {
           <MotionH2 variants={itemVariants} className="text-xl font-bold uppercase mb-4 text-indigo-600 dark:text-slate-400 font-sans tracking-wider">
             How it works
           </MotionH2>
-          <MotionH3 variants={itemVariants} className="text-3xl max-w-2xl mx-auto font-bold mb-4 dark:text-[#d2d2d7]">
+          <MotionH3 variants={itemVariants} className="lg:text-3xl md:text-2xl sm:text-xl text-xl max-w-2xl mx-auto font-bold mb-4 dark:text-[#d2d2d7]">
             Transform any PDF into as easy-to-digest summary in three simple
             steps
           </MotionH3>
@@ -102,17 +99,17 @@ shadow-[0_8px_30px_-20px_rgba(0,0,0,0.25)]
 transition-all duration-300
 hover:-translate-y-[2px]
 hover:shadow-[0_16px_40px_-20px_rgba(0,0,0,0.3)] 
-group w-full"
+group w-[90%] md:w-full mx-auto"
     >
       <div className="flex flex-col gap-4 h-full items-center">
-        <div className="flex items-center justify-center h-24 w-24 rounded-2xl bg-linear-to-br from-indigo-500/10 to-transparent dark:from-slate-500/10 group-hover:bg-indigo-500/20 dark:group-hover:bg-slate-500/20 transition-colors">
+        <div className="flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 lg:h-24 lg:w-24 rounded-2xl bg-linear-to-br from-indigo-500/10 to-transparent group-hover:bg-indigo-500/20 transition-colors">
           <div className="text-indigo-600 dark:text-slate-300 ">{icon}</div>
         </div>
         <div className="flex flex-col gap-1 flex-1 justify-between">
-          <h4 className="text-center text-xl font-bold dark:text-[#d2d2d7]">
+          <h4 className="text-center text-base sm:text-lg lg:text-xl font-bold dark:text-[#d2d2d7]">
             {label}
           </h4>
-          <p className="text-center text-sm text-gray-600 dark:text-slate-400">
+          <p className="text-center text-xs sm:text-sm text-gray-600 dark:text-slate-400">
             {description}
           </p>
         </div>
