@@ -8,7 +8,6 @@ import { BackgroundRippleEffect } from "../ui/background-ripple-effect";
 import { auth } from "@clerk/nextjs/server";
 import { MotionDiv, MotionH1, MotionP, MotionSection } from "../common/motion";
 import { containerVariants, itemVariants } from "@/utils/constants";
-const { userId } = await auth();
 
 const people = [
   {
@@ -55,7 +54,9 @@ const people = [
   },
 ];
 
-export default function HeroSection() {
+export default async function HeroSection() {
+  const { userId } = await auth();
+
   return (
     <MotionSection
       variants={containerVariants}

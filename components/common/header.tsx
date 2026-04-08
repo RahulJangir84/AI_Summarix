@@ -46,7 +46,7 @@ export default function Header({ planBadge }: { planBadge?: React.ReactNode }) {
         {/* Center Nav */}
         <div className="hidden md:flex items-center gap-40">
           <NavLink
-            href="#pricing"
+            href="/#pricing"
             className={cn(
               "text-xl font-medium text-slate-900 dark:text-blue-200/80",
               hoverUnderline,

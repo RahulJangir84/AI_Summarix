@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import type { Metadata } from "next";
 import { Source_Sans_3 as FontSans, Roboto_Flex } from "next/font/google";
 import "./globals.css";

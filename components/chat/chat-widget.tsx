@@ -6,12 +6,14 @@ import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send, Loader2, Trash2, GripHorizontal } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChatMessage } from "./chat-message";
-
+import ChatInput from "../speech/chatInput";
+import useVoiceInput from "@/hook/speech-hook";
 interface ChatWidgetProps {
   summaryText: string;
 }
 
 export default function ChatWidget({ summaryText }: ChatWidgetProps) {
+  
   const [isOpen, setIsOpen] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const [input, setInput] = useState("");
@@ -142,7 +144,7 @@ border border-slate-100 dark:border-white/10"
                     <div>
                       <p className="text-slate-700 text-[17px] font-semibold mb-1 dark:text-slate-400">Ask about your document</p>
                       <p className="text-slate-400 text-[15px] leading-relaxed dark:text-slate-500">
-                        I've read the full document and can answer questions, summarize sections, or find specific details.
+                        I&apos;ve read the full document and can answer questions, summarize sections, or find specific details.
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-2 justify-center mt-1">
@@ -216,7 +218,11 @@ border border-slate-100 dark:border-white/10"
                     className="w-7 h-7 rounded-lg bg-indigo-600 dark:bg-blue-600 hover:bg-indigo-700 disabled:opacity-30 dark:opacity-80 disabled:hover:bg-indigo-600 flex items-center justify-center transition-all shrink-0 shadow-sm shadow-indigo-200"
                   >
                     <Send size={13} className="text-white dark:text-white" />
+                    
+                    {/* <ChatInput/> */}
+
                   </button>
+                    
                 </form>
               </div>
             </motion.div>

@@ -3,6 +3,7 @@ import { MotionSection, MotionDiv, MotionP } from "../common/motion";
 import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
 import Link from "next/link";
 import { containerVariants, itemVariants } from "@/utils/constants";
+import ChatInput from "../speech/chatInput";
 const words = [
   {
     text: "Ready",
