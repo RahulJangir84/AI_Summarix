@@ -37,12 +37,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <html lang="en" className="scroll-smooth">
+        <body className={`font-sans ${fontSans.variable} ${robotoFlex.variable} antialiased`}>
+        <ClerkProvider>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-      <html lang="en" className="scroll-smooth">
-        <body
-          className={`font-sans ${fontSans.variable} ${robotoFlex.variable} antialiased`}
-        >
           <NextTopLoader
           color="#2299DD"        
           height={3}            
@@ -61,9 +59,9 @@ export default function RootLayout({
           </div>
           <Toaster />
           {/* <div className="noise-overlay fixed inset-0 z-[100] opacity-2 pointer-events-none" /> */}
-        </body>
-      </html>
       </ThemeProvider>
     </ClerkProvider>
+        </body>
+      </html>
   );
 }
